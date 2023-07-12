@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="expires" content="-1" />
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
+<title>Login Authentication</title>
+<link rel="icon" href="img/favicon.png" type="image/png" />
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/menu.css"/>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap-theme.css" rel="stylesheet">
+
+	
+</head>
+
+<body role="document">
+$(if chap-id)
+<form name="sendin" action="$(link-login-only)" method="post">
+    <input type="hidden" name="username" />
+    <input type="hidden" name="password" />
+    <input type="hidden" name="dst" value="$(link-orig)" />
+    <input type="hidden" name="popup" value="true" />
+</form>
+
+<script type="text/javascript" src="/md5.js"></script>
+<script type="text/javascript">
+    <!--
+    function doLogin() {
+        document.sendin.username.value = document.login.username.value;
+        document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+        document.sendin.submit();
+        return false;
+    }
+    //-->
+</script>
+$(endif)
+
+<div class="container theme-showcase" role="main">
+
+       <center><div style="text-align: center;">
+       <img src="img/banner.png" style="max-width: 100%; height: auto;" />
+    </div><br>
+	</center>
+     
+    $(if trial == 'yes')
+    <div class="alert alert-success">
+       <center><a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">Free trial available, Click Here</a></center>
+    </div>
+    $(endif)
+    $(if error)
+    <div class="alert alert-danger">
+        $(error)
+    </div>
+    $(endif)
+    <div class="row">
+    <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Login Field</h3>
+        </div>
+        <div class="panel-body">
+            <form name="login" action="$(link-login-only)" method="post"
+                  $(if chap-id) onSubmit="return doLogin()" $(endif)>
+                <input type="hidden" name="dst" value="$(link-orig)" />
+                <input type="hidden" name="popup" value="true" />
+
+                <label for="username"></label>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" name="username" class="form-control" placeholder="Username" aria-describedby="username-field" value="$(username)">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-lock"></i> </span>
+                    <input type="password" name="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+                </div>
+                <br>
+                <input type="submit" class="btn-block btn btn-primary" value="Login">
+            </form>
+        </div>
+    </div>
+    </div>
+    </div>
+
+   <center>
+        <div class="container">
+            <p class="text-muted"><div id="content">
+<table>
+          <tr><th>Packages</th><th>&nbsp;&nbsp;Active Time&nbsp;&nbsp;</th><th>Price</th></tr>
+          <tr><td>1hour</td><td>&nbsp;&nbsp;1 Hour&nbsp;&nbsp;</td><td>P5.00</td></tr>
+          <tr><td>2hours</td><td>&nbsp;&nbsp;2 Hours&nbsp;&nbsp;</td><td>P15.00</td></tr>
+		  <tr><td>1day</td><td>&nbsp;&nbsp;24 Hours&nbsp;&nbsp;</td><td>P35.00</td></tr>
+          <tr><td>1 week</td><td>&nbsp;&nbsp;168 Hours&nbsp;&nbsp;</td><td>P200.00</td></tr>
+		  <tr><td>1 month</td><td>&nbsp;&nbsp;720 Hours&nbsp;&nbsp;</td><td>P600.00</td></tr>
+         <tr><th colspan="4"><div align="center"><br></div></th></tr>
+        </table>
+			<br>For inquiries, or technical concern...<br>
+Click <a href="sms:09056502402">here</a><br>
+        </div></div>
+    </footer>
+
+</div> <!-- /container -->
+
+
+
+</body>
+</html>

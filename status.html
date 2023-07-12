@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="expires" content="-1" />
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
+<title>Status</title>
+</head>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+
+    <script language="JavaScript">
+        <!--
+        $(if advert-pending == 'yes')
+            var popup = '';
+        function focusAdvert() {
+            if (window.focus) popup.focus();
+        }
+        function openAdvert() {
+            popup = open('$(link-advert)', 'hotspot_advert', '');
+            setTimeout("focusAdvert()", 1000);
+        }
+        $(endif)
+        function openLogout() {
+            if (window.name != 'hotspot_status') return true;
+            open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+            window.close();
+            return false;
+        }
+        //-->
+    </script>
+</head>
+
+<body role="document">
+$(if advert-pending == 'yes')
+onLoad="openAdvert()"
+$(endif)
+
+
+    </div>
+</nav>
+
+<div class="container theme-showcase" role="main">
+
+    <div class="row"><br></div>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <center><div class="row">
+        $(if login-by == 'trial')
+            <br><h1>Welcome trial user!</h1><br>
+            $(elif login-by != 'mac')
+            <br><h1>Welcome $(username)!</h1><br>
+            $(endif)
+    </div></center>
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Your connection status</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-responsive table-bordered">
+                        <tbody>
+                        <tr><td align="right"> IP address:<i class="glyphicon glyphicon-phone"></i></td><td>$(ip)</td></tr>
+                        <tr><td align="right">Bytes up/down: <i class="glyphicon glyphicon-transfer"></i> </td><td>$(bytes-in-nice) / $(bytes-out-nice)</td></tr>
+                        $(if session-time-left)
+                        <tr><td align="right">Connected / left: <i class="glyphicon glyphicon-time"></i> </td><td>$(uptime) / $(session-time-left)</td></tr>
+                        $(else)
+                        <tr><td align="right">Connected: <i class="glyphicon glyphicon-time"></i> </td><td>$(uptime)</td></tr>
+                        $(endif)
+                        $(if blocked == 'yes')
+                        <tr><td align="right">Status:</td><td><div style="color: #FF8080">
+                            <a href="$(link-advert)" target="hotspot_advert">advertisement</a> required</div></td>
+                            $(elif refresh-timeout)
+                        <tr><td align="right">Status refresh:</td><td>$(refresh-timeout)</td>
+                            $(endif)
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                    <btn class="btn btn-default btn-block" onclick="location.reload();">Refresh</btn>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                <input type="submit" value="Log Off" class="btn btn-danger btn-block">
+                                    </div>
+                                </form>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+</div> <!-- /container -->
+
+
+
+</body>
+</html>
